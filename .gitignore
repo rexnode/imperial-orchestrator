@@ -1,0 +1,23 @@
+# Runtime state (contains model health, probe results)
+.imperial_state.json
+.imperial_benchmark.json
+.imperial_audit.json
+
+# Claude Code local settings
+.claude/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
