@@ -115,12 +115,51 @@ scripts/
 
 ## 安装
 
+### 前置条件：安装 OpenClaw
+
 ```bash
-# 全局安装
+# 1. 安装 OpenClaw CLI（macOS）
+brew tap openclaw/tap
+brew install openclaw
+
+# 或通过 npm 安装
+npm install -g @openclaw/cli
+
+# 2. 初始化配置
+openclaw init
+
+# 3. 配置模型 Provider（编辑 ~/.openclaw/openclaw.json）
+openclaw config edit
+```
+
+> 详细安装文档请参考 [OpenClaw 官方仓库](https://github.com/openclaw/openclaw)
+
+### 安装 Imperial Orchestrator Skill
+
+```bash
+# 方式一：从 GitHub 克隆安装
+git clone https://github.com/rexnode/imperial-orchestrator.git
 cp -r imperial-orchestrator ~/.openclaw/skills/
 
-# 或工作区安装
+# 方式二：直接复制到全局 skills 目录
+cp -r imperial-orchestrator ~/.openclaw/skills/
+
+# 方式三：工作区级别安装
 cp -r imperial-orchestrator <your-workspace>/skills/
+```
+
+### 验证安装
+
+```bash
+# 发现并探活模型
+python3 ~/.openclaw/skills/imperial-orchestrator/scripts/health_check.py \
+  --openclaw-config ~/.openclaw/openclaw.json \
+  --write-state .imperial_state.json
+
+# 验证路由是否正常
+python3 ~/.openclaw/skills/imperial-orchestrator/scripts/router.py \
+  --task "写一个 Hello World" \
+  --state-file .imperial_state.json
 ```
 
 ## 安全

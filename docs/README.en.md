@@ -115,12 +115,51 @@ scripts/
 
 ## Installation
 
+### Prerequisites: Install OpenClaw
+
 ```bash
-# Global install
+# 1. Install OpenClaw CLI (macOS)
+brew tap openclaw/tap
+brew install openclaw
+
+# Or install via npm
+npm install -g @openclaw/cli
+
+# 2. Initialize configuration
+openclaw init
+
+# 3. Configure model providers (edit ~/.openclaw/openclaw.json)
+openclaw config edit
+```
+
+> For detailed installation docs, see the [OpenClaw official repository](https://github.com/openclaw/openclaw)
+
+### Install Imperial Orchestrator Skill
+
+```bash
+# Option 1: Clone from GitHub
+git clone https://github.com/rexnode/imperial-orchestrator.git
 cp -r imperial-orchestrator ~/.openclaw/skills/
 
-# Or workspace install
+# Option 2: Copy directly to global skills directory
+cp -r imperial-orchestrator ~/.openclaw/skills/
+
+# Option 3: Workspace-level install
 cp -r imperial-orchestrator <your-workspace>/skills/
+```
+
+### Verify Installation
+
+```bash
+# Discover and probe models
+python3 ~/.openclaw/skills/imperial-orchestrator/scripts/health_check.py \
+  --openclaw-config ~/.openclaw/openclaw.json \
+  --write-state .imperial_state.json
+
+# Verify routing works
+python3 ~/.openclaw/skills/imperial-orchestrator/scripts/router.py \
+  --task "Write a Hello World" \
+  --state-file .imperial_state.json
 ```
 
 ## Security
